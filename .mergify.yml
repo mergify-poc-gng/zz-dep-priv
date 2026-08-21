@@ -1,8 +1,15 @@
 pull_request_rules:
-  - name: dep-probe-rule
+  - name: dep-condition-probe
     conditions:
       - base = main
+      - depends-on = mergify-poc-gng/pw-check#2
     actions:
       label:
         add:
-          - evaluated
+          - dep-listed
+  - name: attempt-merge
+    conditions:
+      - base = main
+    actions:
+      merge:
+        method: merge
